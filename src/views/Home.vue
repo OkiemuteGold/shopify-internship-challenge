@@ -2,11 +2,12 @@
     <div class="home">
         <div class="px-3 py-5 px-md-5 bg-light rounded-3 jumbotron">
             <div class="intro container px-0 px-md-3 px-lg-5 py-2 py-md-3">
-                <h1 class="display-5 fw-bold">Custom title</h1>
+                <h1 class="display-5 fw-bold">Shopify Internship Challenge</h1>
 
                 <p>
-                    Using a series of utilities, you can create this jumbotron,
-                    just like the one in previous versions of Bootstrap.
+                    Shopify Internship Challenge to build an application with
+                    React js, that fetches data from the NASA free API. User
+                    should be able to like images. I replicated this in Vue js
                 </p>
                 <!-- <button class="btn btn-primary btn-lg" type="button">
                     Example button
