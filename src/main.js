@@ -6,8 +6,8 @@ import store from './store'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import axios from 'axios';
-Vue.prototype.$axios = axios
+// import axios from 'axios';
+// Vue.prototype.$axios = axios
 
 Vue.config.productionTip = false
 
