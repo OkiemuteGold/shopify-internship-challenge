@@ -41,21 +41,12 @@ export default {
     computed: {
         ...mapGetters(["nasaImages"]),
 
-        // nasaImages: {
-        //     get() {
-        //         return this.$store.state.nasaImages;
-        //     },
-
-        //     set(value) {
-        //         return (this.$store.state.nasaImages = value);
-        //     },
-        // },
-
         fetchedImages() {
             let images = [];
 
             if (this.nasaImages.length > 0) {
                 images = this.nasaImages;
+                // console.log(images);
 
                 // let newImages = images.filter((newImage) => {
                 //     newImage.like = 0;
@@ -67,44 +58,12 @@ export default {
 
                 // images = newImages;
 
-                console.log(images);
                 // console.log(typeof images.like);
             }
 
             return images;
         },
     },
-
-    methods: {
-        // getImages() {
-        //     if (this.nasaImages.length) {
-        //         console.log(this.fetchedImages);
-        //         return (this.fetchedImages = this.nasaImages);
-        //     }
-        // },
-        // addLike(index, event) {
-        //     event.preventDefault();
-        //     let currentPhoto = this.fetchedImages[index];
-        //     if (!localStorage.getItem(currentPhoto)) {
-        //         currentPhoto.likes++;
-        //         console.log(index, "liked");
-        //         localStorage.setItem(currentPhoto, true);
-        //     }
-        //     if (currentPhoto.likes > 0 && localStorage.getItem(currentPhoto)) {
-        //         currentPhoto.likes--;
-        //         console.log(index, "unliked");
-        //         localStorage.removeItem(currentPhoto);
-        //     }
-        // },
-    },
-
-    // created() {
-    //     this.getImages();
-    // },
-
-    // mounted() {
-    //     this.getImages();
-    // },
 };
 </script>
 

@@ -43,36 +43,6 @@ export default {
     },
 
     methods: {
-        // updateLike(image) {
-        //     // console.log("here 1");
-        //     // image.liked = !image.liked;
-
-        //     // if (image.liked) {
-        //     //     image.like = image.like + 1;
-        //     //     console.log(image.liked);
-        //     //     console.log(image.like);
-        //     // } else {
-        //     //     image.like = image.like - 1;
-        //     //     console.log(image.liked);
-        //     //     console.log(image.like);
-        //     // }
-
-        //     if (!localStorage.getItem(image.like)) {
-        //         image.like++;
-        //         this.image.liked = !this.image.liked;
-        //         console.log("liked");
-
-        //         localStorage.setItem(image.like, true);
-        //     }
-        //     if (image.like > 0 && localStorage.getItem(image.like)) {
-        //         image.like.likes--;
-        //         this.image.liked = !this.image.liked;
-        //         console.log("unliked");
-
-        //         localStorage.removeItem(image.like);
-        //     }
-        // },
-
         updateLike(index, event) {
             event.preventDefault();
 

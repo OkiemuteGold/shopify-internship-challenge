@@ -1,5 +1,5 @@
 export const fetchNasaImages = ({ commit, state }) => {
-    console.log("here 1")
+    // console.log("here 1")
     let url = `${state.apiUrl}?sol=1000&page=2&api_key=${state.apiKey}`;
     // console.log(state.apiUrl)
 
