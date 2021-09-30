@@ -1,18 +1,138 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="home">
+        <div class="px-3 py-5 px-md-5 bg-light rounded-3 jumbotron">
+            <div class="intro container px-0 px-md-3 px-lg-5 py-2 py-md-3">
+                <h1 class="display-5 fw-bold">Custom title</h1>
+
+                <p>
+                    Using a series of utilities, you can create this jumbotron,
+                    just like the one in previous versions of Bootstrap.
+                </p>
+                <!-- <button class="btn btn-primary btn-lg" type="button">
+                    Example button
+                </button> -->
+            </div>
+        </div>
+        <section>
+            <div class="container">
+                <div
+                    class="row justify-content-center align-items-center"
+                    v-if="fetchedImages.length > 0"
+                >
+                    <NasaImage
+                        v-for="(image, index) in fetchedImages"
+                        :key="index"
+                        :image="image"
+                        :index="index"
+                    />
+                </div>
+            </div>
+        </section>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import NasaImage from "../components/NasaImage.vue";
+
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+    components: { NasaImage },
+    computed: {
+        ...mapGetters(["nasaImages"]),
+
+        // nasaImages: {
+        //     get() {
+        //         return this.$store.state.nasaImages;
+        //     },
+
+        //     set(value) {
+        //         return (this.$store.state.nasaImages = value);
+        //     },
+        // },
+
+        fetchedImages() {
+            let images = [];
+
+            if (this.nasaImages.length > 0) {
+                images = this.nasaImages;
+
+                // let newImages = images.filter((newImage) => {
+                //     newImage.like = 0;
+                //     newImage.liked = false;
+                //     console.log(typeof newImage.like);
+
+                //     return newImage;
+                // });
+
+                // images = newImages;
+
+                console.log(images);
+                // console.log(typeof images.like);
+            }
+
+            return images;
+        },
+    },
+
+    methods: {
+        // getImages() {
+        //     if (this.nasaImages.length) {
+        //         console.log(this.fetchedImages);
+        //         return (this.fetchedImages = this.nasaImages);
+        //     }
+        // },
+        // addLike(index, event) {
+        //     event.preventDefault();
+        //     let currentPhoto = this.fetchedImages[index];
+        //     if (!localStorage.getItem(currentPhoto)) {
+        //         currentPhoto.likes++;
+        //         console.log(index, "liked");
+        //         localStorage.setItem(currentPhoto, true);
+        //     }
+        //     if (currentPhoto.likes > 0 && localStorage.getItem(currentPhoto)) {
+        //         currentPhoto.likes--;
+        //         console.log(index, "unliked");
+        //         localStorage.removeItem(currentPhoto);
+        //     }
+        // },
+    },
+
+    // created() {
+    //     this.getImages();
+    // },
+
+    // mounted() {
+    //     this.getImages();
+    // },
+};
 </script>
+
+<style scoped>
+.jumbotron {
+    max-width: 1300px;
+    height: 320px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    border-radius: 1rem !important;
+}
+
+.jumbotron h1,
+.jumbotron p {
+    font-family: "Roboto Mono", monospace;
+}
+
+.intro h1 {
+    margin-bottom: 20px;
+}
+
+.intro p {
+    max-width: 650px;
+}
+
+section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+</style>

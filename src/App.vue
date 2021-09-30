@@ -1,32 +1,95 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <Header />
+
+        <transition name="page" mode="out-in">
+            <router-view />
+        </transition>
+
+        <Footer />
     </div>
-    <router-view/>
-  </div>
 </template>
 
+<script>
+import Header from "../src/components/Header.vue";
+import Footer from "./components/Footer.vue";
+
+import { mapActions } from "vuex";
+export default {
+    components: {
+        Header,
+        Footer,
+    },
+
+    methods: {
+        ...mapActions(["fetchNasaImages", "saveNasaImages"]),
+    },
+
+    mounted() {
+        let images = JSON.parse(localStorage.getItem("nasaImages"))
+            ? JSON.parse(localStorage.getItem("nasaImages"))
+            : [];
+
+        if (images.length > 0) {
+            this.saveNasaImages(images);
+        } else {
+            this.fetchNasaImages();
+        }
+    },
+};
+</script>
+
 <style>
+*,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow-x: hidden;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    font-family: "Open Sans", sans-serif;
+    /* font-family: "Roboto Mono", monospace; */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+.page-enter,
+.page-leave-to {
+    opacity: 0;
+    transform: translateY(-30px);
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.page-enter-active,
+.page-leave-active {
+    transition: all 0.3s ease;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.page-enter-to,
+.page-leave {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+::-moz-selection {
+    background: #42b983;
+    color: #fff;
+}
+
+::selection {
+    background: #42b983;
+    color: #fff;
+}
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
 }
 </style>
