@@ -13,7 +13,7 @@
 
                     <i
                         class="far fa-heart text-danger"
-                        title="like photo"
+                        :aria-label="[!liked ? 'like' : 'unlike']"
                         :class="[!liked ? 'far fa-heart' : 'fas fa-heart']"
                         @click="updateLike(index, $event)"
                     >
@@ -49,15 +49,22 @@ export default {
             this.liked = !this.liked;
             let photoName = this.image.rover.name;
             let photoLikes = this.likes;
+            localStorage.setItem("selectedIndex", Number(this.id));
 
             if (this.image) {
                 if (this.liked) {
-                    // if (!localStorage.getItem(photoLikes)) {
-                    this.likes++;
-                    console.log(index, this.id, `${photoName} has been liked`);
+                    let photoLikeIndex = Number(
+                        localStorage.getItem("selectedIndex")
+                    );
 
-                    // localStorage.setItem(photoLikes, true);
-                    // }
+                    if (photoLikeIndex !== null) {
+                        this.likes++;
+                        console.log(
+                            index,
+                            this.id,
+                            `${photoName} has been liked`
+                        );
+                    }
                 }
                 if (photoLikes > 0) {
                     this.likes--;
@@ -99,7 +106,6 @@ export default {
     width: 100%;
     height: 200px;
     border-radius: 1rem 1rem 0 0;
-    /* background: url("../assets/img/1.jpg"); */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -140,13 +146,6 @@ export default {
     justify-content: space-between;
 }
 
-/* .image-info .title svg {
-    width: 16px;
-    height: 16px;
-    color: #252525;
-    margin-bottom: 4px;
-} */
-
 .image-info .title i {
     font-size: 1.25rem;
 }
@@ -177,5 +176,39 @@ export default {
     margin-bottom: 0;
     padding-left: 3px;
     padding-right: 3px;
+}
+
+.image-info .title i[aria-label] {
+    position: relative;
+}
+
+.image-info .title i[aria-label]:after {
+    content: attr(aria-label);
+    position: absolute;
+    bottom: 1rem;
+    right: 98%;
+    text-transform: lowercase;
+    font-size: 0.725rem;
+    font-weight: 600;
+    font-family: "Open Sans", sans-serif;
+    padding: 4px 10px;
+    line-height: 14px;
+    background-color: #f2f2f2;
+    color: #2c3e50;
+    box-shadow: inset 0.5px -0.5px 2px rgba(220, 53, 69, 0.25);
+    white-space: nowrap;
+    border-radius: 8px 0 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    z-index: 2;
+}
+.image-info .title i[aria-label]:hover:after {
+    opacity: 1;
+    visibility: visible;
 }
 </style>
